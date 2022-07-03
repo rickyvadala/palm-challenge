@@ -1,0 +1,25 @@
+.primary-layout {
+  min-height: 100vh;
+
+  &__header {
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__user {
+    color: white;
+  }
+
+  &__logo {
+    width: 48px;
+  }
+
+  &__content {
+    margin: 0 16px;
+  }
+
+  .ant-breadcrumb-link {
+    text-transform: capitalize;
+  }
+}
