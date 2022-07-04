@@ -1,9 +1,9 @@
-import {IUser} from "./IUser";
+export type TransactionType = "deposit" | "withdraw" | "payment"
 
 export interface ITransaction {
     id: number,
     amount: number,
-    accountFrom: IUser,
-    accountTo: IUser,
-    date: Date
+    type: TransactionType,
+    userFrom?: number | undefined,
+    userTo?: number | undefined
 }

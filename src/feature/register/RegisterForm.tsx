@@ -6,7 +6,8 @@ import {useNavigate} from "react-router-dom";
 import Button from "../../components/atom/Button";
 import './RegisterForm.scss'
 import {IUser} from "../../model";
-
+import {KeyOutlined, UserOutlined} from '@ant-design/icons';
+import {NotificationType, openNotification} from "../../components/atom/Notification";
 
 export const RegisterForm: React.FC = () => {
     const dispatch = useAppDispatch()
@@ -22,8 +23,13 @@ export const RegisterForm: React.FC = () => {
             dispatch(createUser(user))
             dispatch(login(user))
             navigate('/')
-        } catch (e) {
-            alert(e)
+        } catch (e: any) {
+            const notification: NotificationType = {
+                message: 'Error',
+                description: e.message,
+                type: 'error'
+            }
+            openNotification(notification)
         }
     };
 
@@ -46,7 +52,7 @@ export const RegisterForm: React.FC = () => {
                 name="username"
                 rules={[{required: true, message: 'Please input your username!'}]}
             >
-                <Input/>
+                <Input prefix={<UserOutlined/>}/>
             </Form.Item>
 
             <Form.Item
@@ -54,7 +60,7 @@ export const RegisterForm: React.FC = () => {
                 name="password"
                 rules={[{required: true, message: 'Please input your password!'}]}
             >
-                <Input.Password/>
+                <Input.Password prefix={<KeyOutlined/>}/>
             </Form.Item>
 
 
@@ -63,7 +69,7 @@ export const RegisterForm: React.FC = () => {
                 name="passwordRepeat"
                 rules={[{required: true, message: 'Please repeat your password!'}]}
             >
-                <Input.Password/>
+                <Input.Password prefix={<KeyOutlined/>}/>
             </Form.Item>
 
 

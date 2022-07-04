@@ -1,12 +1,12 @@
 import React from "react";
 import './LoginForm.scss';
-import {Form} from "antd";
+import {Form, Input} from "antd";
 import {useAppDispatch} from "../../store/hooks";
 import {login} from "../../store/slices/users";
 import {useNavigate} from "react-router-dom";
 import Button from "../../components/atom/Button";
-import Input from "../../components/atom/Input";
 import {KeyOutlined, UserOutlined} from '@ant-design/icons';
+import {NotificationType, openNotification} from "../../components/atom/Notification";
 
 
 export const LoginForm: React.FC = () => {
@@ -20,8 +20,13 @@ export const LoginForm: React.FC = () => {
                 password: values.password
             }))
             navigate('/')
-        } catch (e) {
-            alert(e)
+        } catch (e: any) {
+            const notification: NotificationType = {
+                message: 'Error',
+                description: e.message,
+                type: 'error'
+            }
+            openNotification(notification)
         }
     };
 
@@ -52,7 +57,7 @@ export const LoginForm: React.FC = () => {
                 name="password"
                 rules={[{required: true, message: 'Please input your password!'}]}
             >
-                <Input size="large" prefix={<KeyOutlined/>}/>
+                <Input.Password size="large" prefix={<KeyOutlined/>}/>
             </Form.Item>
             <div className="register-form__buttons">
                 <Form.Item>

@@ -2,6 +2,8 @@ import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {IUser} from "../../model";
 
+let idGenerator = 1
+
 const initialState = {
     currentUser: {} as IUser,
     allUsers: [
@@ -20,13 +22,14 @@ export const usersSlice = createSlice({
     reducers: {
         createUser: (state, {payload}) => {
             if (!state.allUsers.find(user => user.username === payload.username)) {
+                idGenerator++
                 const newUser = {
-                    id: state.allUsers[state.allUsers.length - 1].id + 1,
+                    id: idGenerator,
                     ...payload,
                 }
                 state.allUsers.push(newUser)
             } else {
-                throw Error('Oh shit')
+                throw Error(`The username: ${payload.username} is already in use, please select another`)
             }
         },
         login: (state, {payload}) => {
@@ -36,7 +39,7 @@ export const usersSlice = createSlice({
             if (user) {
                 state.currentUser = user
             } else {
-                throw Error('Oh shit')
+                throw Error(`Incorrect username or password`)
             }
         },
         logout: (state) => {

@@ -27,10 +27,14 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-    getItem('Home', 'home', <HomeOutlined/>),
-    getItem('Wallet', 'wallet', <WalletOutlined/>, [
-        getItem('History', 'history', <HistoryOutlined/>),
-        getItem('Transaction', 'transaction', <TransactionOutlined/>)
+    getItem('Home', 'home', <HomeOutlined width="2em"/>),
+    getItem('Fiat Wallet', 'fiat', <WalletOutlined/>, [
+        getItem('Main', 'fiat-wallet', <HistoryOutlined/>),
+        getItem('Transaction', 'fiat-wallet/transaction', <TransactionOutlined/>)
+    ]),
+    getItem('Crypto Wallet', 'crypto', <WalletOutlined/>, [
+        getItem('Main', 'crypto-wallet', <HistoryOutlined/>),
+        getItem('Transaction', 'crypto-wallet/transaction', <TransactionOutlined/>)
     ]),
     getItem('Logout', 'login', <LogoutOutlined/>),
 ];
@@ -66,11 +70,12 @@ const PrimaryLayout: React.FC = () => {
                         <AntBreadcrumb.Item>Wallet</AntBreadcrumb.Item>
                         <AntBreadcrumb.Item>{current}</AntBreadcrumb.Item>
                     </AntBreadcrumb>
-                    <div className="site-layout-background" style={{padding: 24, minHeight: 360}}>
+                    <div className="site-layout__outlet" style={{minHeight: 360}}>
                         <Outlet/>
                     </div>
                 </Content>
-                <Footer style={{textAlign: 'center'}}>Palm Challenge ©2021 Created by Ricky Vadalá</Footer>
+                <Footer style={{textAlign: 'center'}}><b>Palm Challenge</b> ©2021 Created by <b>Ricky
+                    Vadalá</b></Footer>
             </AntLayout>
         </AntLayout>
     );
