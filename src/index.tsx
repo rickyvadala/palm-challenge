@@ -6,17 +6,28 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux'
 import {BrowserRouter} from "react-router-dom";
 import {store} from './store/store'
+import MetaMaskAccountProvider from "./providers/MetaMaskProvider";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
+
+declare global {
+    interface Window {
+        ethereum: any,
+        ethersProvider: any
+    }
+}
+
 root.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <BrowserRouter>
-                <App/>
-            </BrowserRouter>
-        </Provider>
+        <MetaMaskAccountProvider>
+            <Provider store={store}>
+                <BrowserRouter>
+                    <App/>
+                </BrowserRouter>
+            </Provider>
+        </MetaMaskAccountProvider>
     </React.StrictMode>
 );
 

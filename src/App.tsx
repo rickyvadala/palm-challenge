@@ -11,6 +11,7 @@ import Register from "./pages/register/Register";
 import {ProtectedRoute} from "./feature/router/ProtectedRoute";
 import {GuestLayout} from "./layout/guest-layout/GuestLayout";
 import CryptoWallet from "./pages/crypto-wallet/CryptoWallet";
+import {CryptoRoute} from "./feature/router/CryptoRoute";
 
 export default App;
 
@@ -25,7 +26,7 @@ function App() {
                             <Route index element={<FiatWallet/>}/>
                             <Route path="transaction" element={<Transaction/>}/>
                         </Route>
-                        <Route path="crypto-wallet">
+                        <Route path="crypto-wallet" element={<CryptoRoute/>}>
                             <Route index element={<CryptoWallet/>}/>
                             <Route path="transaction" element={<Transaction/>}/>
                         </Route>

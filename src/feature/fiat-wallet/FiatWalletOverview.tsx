@@ -1,13 +1,15 @@
-import {useAppSelector} from "../../store/hooks";
-import {amountSelector, transactionsSelector} from "../../store/slices/fiat";
 import React, {useState} from "react";
 import {ITransaction} from "../../model";
 import {ColumnsType} from "antd/lib/table";
 import {Table, Tag} from "antd";
+import {useGetBalance, useGetTransactions} from "../../hooks";
+import {useSelector} from "react-redux";
+import {currentUserSelector} from "../../store/slices/users";
 
 export const FiatWalletOverview = () => {
-    const balance = useAppSelector(amountSelector)
-    const transactions = useAppSelector(transactionsSelector)
+    const user = useSelector(currentUserSelector)
+    const balance = useGetBalance()
+    const transactions = useGetTransactions()
     const [data, setData] = useState<ITransaction[]>(transactions);
 
     const columns: ColumnsType<ITransaction> = [
@@ -25,20 +27,24 @@ export const FiatWalletOverview = () => {
             title: 'Type',
             dataIndex: 'type',
             key: 'type',
-            render: type => (
-                <Tag color={
-                    type === "deposit" ? 'green' : type === "withdraw" ? "volcano" : "blue"
-                }
-                     key={type}
-                >
-                    {type.toUpperCase()}
-                </Tag>
-            ),
+            render: (type, t) => {
+                const greenCondition = (t: ITransaction) => t.type === "deposit" || t.destination === user.id
+                return (
+                    <Tag key={JSON.stringify(t)} color={greenCondition(t) ? 'green' : "volcano"}>
+                        {type.toUpperCase()}
+                    </Tag>
+                )
+            },
+        },
+        {
+            title: 'Origin',
+            dataIndex: 'origin',
+            key: 'origin',
         },
         {
             title: 'Destination',
-            dataIndex: 'userTo',
-            key: 'userTo',
+            dataIndex: 'destination',
+            key: 'destination',
         },
     ];
 

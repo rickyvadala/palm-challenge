@@ -4,6 +4,6 @@ export interface ITransaction {
     id: number,
     amount: number,
     type: TransactionType,
-    userFrom?: number | undefined,
-    userTo?: number | undefined
+    origin?: number,
+    destination?: number | undefined
 }

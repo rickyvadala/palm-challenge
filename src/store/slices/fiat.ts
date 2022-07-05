@@ -1,46 +1,50 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {ITransaction} from "../../model";
+import {balanceCalculator} from "../../utils/balanceCalculator";
 
 const initialState = {
     transactions: [
         {
             id: 1,
             amount: 500,
+            origin: 1,
             type: "deposit"
         },
         {
             id: 2,
             amount: 10,
+            origin: 1,
             type: "withdraw"
         },
         {
             id: 3,
             amount: 50,
-            userFrom: 1,
-            userTo: 2,
+            origin: 1,
+            destination: 2,
             type: "payment"
         },
         {
             id: 4,
             amount: 100,
-            userFrom: 1,
-            userTo: 2,
+            origin: 1,
+            destination: 2,
+            type: "payment"
+        },
+        {
+            id: 5,
+            amount: 5000,
+            origin: 2,
+            type: "deposit"
+        },
+        {
+            id: 6,
+            amount: 100,
+            origin: 2,
+            destination: 1,
             type: "payment"
         },
     ] as Array<ITransaction>
-}
-
-const backendAmountCalculator = (state: RootState) => {
-    return state.fiat.transactions
-        .filter((t: ITransaction) => {
-            return t.userTo === 1 || t.userFrom === 1 || t.type !== "payment"
-        })
-        .reduce((a: number, b: ITransaction) => {
-            return b.type === "deposit"
-                ? a + b.amount
-                : a - b.amount
-        }, 0)
 }
 
 export const fiatSlice = createSlice({
@@ -51,17 +55,19 @@ export const fiatSlice = createSlice({
             const deposit: ITransaction = {
                 id: 0,
                 type: "deposit",
-                amount: payload
+                amount: payload.amount,
+                origin: payload.origin
             }
             state.transactions.push(deposit)
         },
         withdraw: (state: RootState, {payload}) => {
-            const nextAmount = backendAmountCalculator(state) - payload
+            const nextAmount = balanceCalculator(state, payload.origin) - payload.amount
             if (nextAmount >= 0) {
                 const withdraw: ITransaction = {
                     id: 0,
                     type: "withdraw",
-                    amount: payload
+                    amount: payload.amount,
+                    origin: payload.origin
                 }
 
                 state.transactions.push(withdraw)
@@ -70,14 +76,14 @@ export const fiatSlice = createSlice({
             }
         },
         pay: (state, {payload}) => {
-            const nextAmount = backendAmountCalculator(state) - payload
+            const nextAmount = balanceCalculator(state.transactions, payload.origin) - payload.amount
             if (nextAmount >= 0) {
                 const payment: ITransaction = {
                     id: 0,
                     type: "payment",
                     amount: payload.amount,
-                    userFrom: payload.userFrom,
-                    userTo: payload.userTo
+                    origin: payload.origin,
+                    destination: payload.destination
                 }
 
                 state.transactions.push(payment)
@@ -90,4 +96,3 @@ export const fiatSlice = createSlice({
 
 export const {deposit, withdraw, pay} = fiatSlice.actions
 export const transactionsSelector = (state: RootState) => state.fiat.transactions
-export const amountSelector = (state: RootState) => backendAmountCalculator(state)

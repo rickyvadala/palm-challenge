@@ -26,8 +26,7 @@ export const RegisterForm: React.FC = () => {
         } catch (e: any) {
             const notification: NotificationType = {
                 message: 'Error',
-                description: e.message,
-                type: 'error'
+                description: e.message
             }
             openNotification(notification)
         }
