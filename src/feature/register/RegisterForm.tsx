@@ -22,7 +22,7 @@ export const RegisterForm: React.FC = () => {
         try {
             dispatch(createUser(user))
             dispatch(login(user))
-            navigate('/')
+            navigate('/home')
         } catch (e: any) {
             const notification: NotificationType = {
                 message: 'Error',

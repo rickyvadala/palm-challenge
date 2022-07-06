@@ -8,6 +8,8 @@ import {currentUserSelector} from "../../../store/slices/users";
 import Button from "../../../components/atom/Button";
 import "./FIatWalletOverview.scss"
 import {FiatWalletTransaction} from "../fiat-wallet-transaction/FiatWalletTransaction";
+import {PlusCircleOutlined} from '@ant-design/icons';
+
 
 
 export const FiatWalletOverview: React.FC = () => {
@@ -63,12 +65,13 @@ export const FiatWalletOverview: React.FC = () => {
                         shape={"round"}
                         type={"primary"}
                         label={"New transaction"}
+                        icon={<PlusCircleOutlined/>}
                         onClick={showModal}/>
             </div>
             <Table rowKey={"id"}
                    columns={columns}
                    dataSource={transactions}
-                   pagination={{pageSize: 10}}
+                   pagination={{pageSize: 8}}
             />
             <FiatWalletTransaction isModalVisible={isModalVisible}
                                    handleOk={handleOk}

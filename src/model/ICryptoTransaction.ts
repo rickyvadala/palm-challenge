@@ -1,5 +1,3 @@
-import {BigNumber} from "ethers";
-
 export interface ICryptoTransaction {
     hash: number,
     value: string,

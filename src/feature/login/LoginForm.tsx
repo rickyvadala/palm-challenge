@@ -19,7 +19,7 @@ export const LoginForm: React.FC = () => {
                 username: values.username,
                 password: values.password
             }))
-            navigate('/')
+            navigate('/home')
         } catch (e: any) {
             const notification: NotificationType = {
                 message: 'Error',

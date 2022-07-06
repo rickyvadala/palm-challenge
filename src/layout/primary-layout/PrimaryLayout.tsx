@@ -1,8 +1,8 @@
 import {HomeOutlined, LogoutOutlined, TransactionOutlined, WalletOutlined} from '@ant-design/icons';
 import type {MenuProps} from 'antd';
 import {Breadcrumb as AntBreadcrumb, Layout as AntLayout, Menu as AntMenu} from 'antd';
-import React, {useState} from 'react';
-import {Outlet, useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {currentUserSelector, logout} from "../../store/slices/users";
 import {Logo} from "../../components/atom/Logo";
@@ -39,6 +39,11 @@ const PrimaryLayout: React.FC = () => {
     const [current, setCurrent] = useState('home');
     let navigate = useNavigate();
     const selector = useAppSelector(currentUserSelector)
+    let location = useLocation();
+
+    useEffect(() => {
+        setCurrent(location.pathname.slice(1, location.pathname.length + 1).toLowerCase())
+    }, [location]);
 
     const onClick: MenuProps['onClick'] = e => {
         if (e.key === 'logout') {
@@ -65,7 +70,7 @@ const PrimaryLayout: React.FC = () => {
                         <AntBreadcrumb.Item>{current}</AntBreadcrumb.Item>
                     </AntBreadcrumb>
                     <div className="site-layout__outlet" style={{minHeight: 360}}>
-                        <Outlet/>
+                        <Outlet context={[setCurrent]}/>
                     </div>
                 </Content>
                 <Footer style={{textAlign: 'center'}}>

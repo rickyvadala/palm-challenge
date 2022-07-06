@@ -5,7 +5,7 @@ import type {PreloadedState} from '@reduxjs/toolkit'
 import {configureStore} from '@reduxjs/toolkit'
 import {Provider} from 'react-redux'
 
-import type {RootState, AppStore} from '../../store/store'
+import type {AppStore, RootState} from '../../store/store'
 // As a basic setup, import your same slice reducers
 import {initialState} from "./store";
 import {usersSlice} from "../../store/slices/users";

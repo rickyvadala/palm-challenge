@@ -6,5 +6,5 @@ export const CryptoRoute: React.FC = () => {
     const {isConnected} = useMetaMaskAccount();
     return isConnected
         ? <Outlet/>
-        : <Navigate to="/"/>;
+        : <Navigate to="/home"/>;
 }

@@ -1,4 +1,4 @@
-import { createTestStore } from '../utils/store';
+import {createTestStore} from '../utils/store';
 import {usersSlice} from "../../store/slices/users";
 
 describe('testSlice redux state tests', () => {

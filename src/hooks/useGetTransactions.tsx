@@ -6,5 +6,5 @@ import {transactionsSelector} from "../store/slices/fiat";
 export const useGetTransactions = () => {
     const transactions: Array<ITransaction> = useAppSelector(transactionsSelector)
     const {id} = useAppSelector(currentUserSelector)
-    return transactions.filter((t: ITransaction) => t.origin === id || t.destination === id)
+    return transactions.filter((t: ITransaction) => t.origin === id || t.destination === id).reverse()
 }

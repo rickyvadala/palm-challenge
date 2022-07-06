@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import {ITransaction, IUser} from "../../model";
 import {RootState} from "../../store/store";
 import {usersSlice} from "../../store/slices/users";

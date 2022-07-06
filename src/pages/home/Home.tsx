@@ -3,7 +3,7 @@ import {CryptoWalletConnection} from "../../feature/crypto-wallet/crypto-wallet-
 import Button from "../../components/atom/Button";
 import {useNavigate} from "react-router-dom";
 import './Home.scss'
-import MetaMaskProvider, {useMetaMaskAccount} from "../../providers/MetaMaskProvider";
+import {useMetaMaskAccount} from "../../providers/MetaMaskProvider";
 
 type WalletType = "fiat" | "crypto"
 const Home: React.FC = () => {
@@ -14,7 +14,7 @@ const Home: React.FC = () => {
     useEffect(() => {
         (walletSelected === 'crypto' && isConnected) && navigate('/crypto')
     }, [walletSelected])
-    
+
     return (
         <div className={"home"}>
             <h2>Welcome to Palm Challenge</h2>

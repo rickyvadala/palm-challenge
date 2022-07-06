@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {IUser} from "../../model";
 
-let singletonId = 1
+let singletonId = 2
 const idGenerator = () => ++singletonId
 
 const initialState = {
@@ -12,6 +12,11 @@ const initialState = {
             id: 1,
             username: "ricky",
             password: "ricky"
+        },
+        {
+            id: 2,
+            username: "palm",
+            password: "palm"
         }
     ] as Array<IUser>
 }

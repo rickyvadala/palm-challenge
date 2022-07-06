@@ -5,7 +5,6 @@ import "antd/dist/antd.css";
 import PrimaryLayout from "./layout/primary-layout/PrimaryLayout";
 import Home from "./pages/home/Home";
 import FiatWallet from "./pages/fiat-wallet/FiatWallet";
-import Transaction from "./pages/fiat-wallet/transaction/Transaction";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import {ProtectedRoute} from "./feature/router/ProtectedRoute";
@@ -21,7 +20,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<ProtectedRoute/>}>
                     <Route path="/" element={<PrimaryLayout/>}>
-                        <Route index element={<Home/>}/>
+                        <Route path="home" element={<Home/>}/>
                         <Route path="fiat" element={<FiatWallet/>}/>
                         <Route path="crypto" element={<CryptoRoute/>}>
                             <Route index element={<CryptoWallet/>}/>
