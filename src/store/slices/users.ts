@@ -2,7 +2,8 @@ import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {IUser} from "../../model";
 
-let idGenerator = 1
+let singletonId = 1
+const idGenerator = () => ++singletonId
 
 const initialState = {
     currentUser: {} as IUser,
@@ -22,9 +23,8 @@ export const usersSlice = createSlice({
     reducers: {
         createUser: (state, {payload}) => {
             if (!state.allUsers.find(user => user.username === payload.username)) {
-                idGenerator++
                 const newUser = {
-                    id: idGenerator,
+                    id: idGenerator(),
                     ...payload,
                 }
                 state.allUsers.push(newUser)

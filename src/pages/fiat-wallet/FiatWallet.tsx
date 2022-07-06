@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../components/atom/Button";
 import {useNavigate} from "react-router-dom";
-import {FiatWalletOverview} from "../../feature/fiat-wallet/FiatWalletOverview";
+import {FiatWalletOverview} from "../../feature/fiat-wallet/fiat-wallet-overview/FiatWalletOverview";
 
 const FiatWallet: React.FC = () => {
     const navigate = useNavigate()
@@ -10,12 +10,6 @@ const FiatWallet: React.FC = () => {
         <div className={"fiat-wallet"}>
             <h1>Fiat Wallet</h1>
             <FiatWalletOverview/>
-            <Button size="large"
-                    shape={"round"}
-                    type={"primary"}
-                    label={"New transaction"}
-                    onClick={() => navigate('/fiat-wallet/transaction')}
-            />
         </div>
     )
 }

@@ -89,7 +89,7 @@ export const RegisterForm: React.FC = () => {
                             label="Login"
                             size="large"
                             style={{width: '100%'}}
-                            onClick={() => navigate('/login')}
+                            onClick={() => navigate('/guest')}
                     />
                 </Form.Item>
             </div>

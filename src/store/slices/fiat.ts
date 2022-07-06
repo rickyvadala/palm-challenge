@@ -1,8 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {ITransaction} from "../../model";
-import {balanceCalculator} from "../../utils/balanceCalculator";
+import {balanceCalculator as bc} from "../../utils/balanceCalculator";
 
+let singletonId = 6
+const idGenerator = () => ++singletonId
+const balanceCalculator = bc
 const initialState = {
     transactions: [
         {
@@ -53,18 +56,19 @@ export const fiatSlice = createSlice({
     reducers: {
         deposit: (state, {payload}) => {
             const deposit: ITransaction = {
-                id: 0,
+                id: idGenerator(),
                 type: "deposit",
                 amount: payload.amount,
                 origin: payload.origin
             }
+
             state.transactions.push(deposit)
         },
         withdraw: (state: RootState, {payload}) => {
-            const nextAmount = balanceCalculator(state, payload.origin) - payload.amount
+            const nextAmount = balanceCalculator(state.transactions, payload.origin) - payload.amount
             if (nextAmount >= 0) {
                 const withdraw: ITransaction = {
-                    id: 0,
+                    id: idGenerator(),
                     type: "withdraw",
                     amount: payload.amount,
                     origin: payload.origin
@@ -79,7 +83,7 @@ export const fiatSlice = createSlice({
             const nextAmount = balanceCalculator(state.transactions, payload.origin) - payload.amount
             if (nextAmount >= 0) {
                 const payment: ITransaction = {
-                    id: 0,
+                    id: idGenerator(),
                     type: "payment",
                     amount: payload.amount,
                     origin: payload.origin,

@@ -22,22 +22,16 @@ function App() {
                 <Route path="/" element={<ProtectedRoute/>}>
                     <Route path="/" element={<PrimaryLayout/>}>
                         <Route index element={<Home/>}/>
-                        <Route path="fiat-wallet">
-                            <Route index element={<FiatWallet/>}/>
-                            <Route path="transaction" element={<Transaction/>}/>
-                        </Route>
-                        <Route path="crypto-wallet" element={<CryptoRoute/>}>
+                        <Route path="fiat" element={<FiatWallet/>}/>
+                        <Route path="crypto" element={<CryptoRoute/>}>
                             <Route index element={<CryptoWallet/>}/>
-                            <Route path="transaction" element={<Transaction/>}/>
                         </Route>
                         <Route path="*" element={<Home/>}/>
                     </Route>
                 </Route>
-                <Route path="/login" element={<GuestLayout/>}>
+                <Route path="guest" element={<GuestLayout/>}>
                     <Route index element={<Login/>}/>
-                </Route>
-                <Route path="/register" element={<GuestLayout/>}>
-                    <Route index element={<Register/>}/>
+                    <Route path="register" element={<Register/>}/>
                 </Route>
             </Routes>
         </div>

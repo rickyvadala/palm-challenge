@@ -7,5 +7,5 @@ export const ProtectedRoute: React.FC = () => {
     const isAuth = useAppSelector(isAuthSelector);
     return isAuth
         ? <Outlet/>
-        : <Navigate to="/login"/>;
+        : <Navigate to="/guest"/>;
 }

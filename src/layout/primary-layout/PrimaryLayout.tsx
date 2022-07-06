@@ -1,4 +1,4 @@
-import {HistoryOutlined, HomeOutlined, LogoutOutlined, TransactionOutlined, WalletOutlined} from '@ant-design/icons';
+import {HomeOutlined, LogoutOutlined, TransactionOutlined, WalletOutlined} from '@ant-design/icons';
 import type {MenuProps} from 'antd';
 import {Breadcrumb as AntBreadcrumb, Layout as AntLayout, Menu as AntMenu} from 'antd';
 import React, {useState} from 'react';
@@ -28,15 +28,9 @@ function getItem(
 
 const items: MenuItem[] = [
     getItem('Home', 'home', <HomeOutlined width="2em"/>),
-    getItem('Fiat Wallet', 'fiat', <WalletOutlined/>, [
-        getItem('Main', 'fiat-wallet', <HistoryOutlined/>),
-        getItem('Transaction', 'fiat-wallet/transaction', <TransactionOutlined/>)
-    ]),
-    getItem('Crypto Wallet', 'crypto', <WalletOutlined/>, [
-        getItem('Main', 'crypto-wallet', <HistoryOutlined/>),
-        getItem('Transaction', 'crypto-wallet/transaction', <TransactionOutlined/>)
-    ]),
-    getItem('Logout', 'login', <LogoutOutlined/>),
+    getItem('Fiat Wallet', 'fiat', <WalletOutlined/>),
+    getItem('Crypto Wallet', 'crypto', <TransactionOutlined/>),
+    getItem('Logout', 'guest', <LogoutOutlined/>),
 ];
 
 const PrimaryLayout: React.FC = () => {
@@ -74,8 +68,9 @@ const PrimaryLayout: React.FC = () => {
                         <Outlet/>
                     </div>
                 </Content>
-                <Footer style={{textAlign: 'center'}}><b>Palm Challenge</b> ©2021 Created by <b>Ricky
-                    Vadalá</b></Footer>
+                <Footer style={{textAlign: 'center'}}>
+                    <b>Palm Challenge</b> ©2021 Created by <b>Ricky Vadalá</b>
+                </Footer>
             </AntLayout>
         </AntLayout>
     );

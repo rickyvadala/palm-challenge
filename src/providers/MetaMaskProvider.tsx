@@ -10,9 +10,8 @@ type MetaMaskContextTypes = {
     connectedAccount: string;
     accountBalance: string | undefined;
     connectAccount: () => void;
-    transfer: (amount: string, address: string) => void;
+    transfer: (amount: string, address: string) => any;
     getTransactions: (address: string) => any;
-
 };
 
 const MetaMaskAccountContext = createContext<MetaMaskContextTypes>({
@@ -98,15 +97,14 @@ const MetaMaskAccountProvider = ({children}: ProviderProps) => {
         }
     };
 
-    const transfer = async (amount: string, address: string) => {
+    const transfer = (amount: string, address: string) => {
         const provider = new ethers.providers.Web3Provider(ethereum)
         const signer = provider.getSigner()
         ethers.utils.getAddress(address)
-        await signer.sendTransaction({
+        return signer.sendTransaction({
             to: address,
             value: ethers.utils.parseEther(amount)
         })
-        return;
     }
 
     const getTransactions = (address: string) => {

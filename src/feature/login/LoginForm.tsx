@@ -29,10 +29,6 @@ export const LoginForm: React.FC = () => {
         }
     };
 
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
-
     return (
         <Form className="login-form"
               name="basic"
@@ -40,7 +36,6 @@ export const LoginForm: React.FC = () => {
               wrapperCol={{span: 24}}
               initialValues={{remember: true}}
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
               autoComplete="off"
         >
             <Form.Item
@@ -74,7 +69,7 @@ export const LoginForm: React.FC = () => {
                             shape="round"
                             size="large"
                             style={{width: '100%'}}
-                            onClick={() => navigate('/register')}/>
+                            onClick={() => navigate('/guest/register')}/>
                 </Form.Item>
             </div>
         </Form>
