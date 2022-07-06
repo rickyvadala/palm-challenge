@@ -2,6 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {ITransaction} from "../../model";
 import {balanceCalculator as bc} from "../../utils/balanceCalculator";
+import {serializedDate} from "../../utils/dateUtils";
 
 let singletonId = 6
 const idGenerator = () => ++singletonId
@@ -12,40 +13,46 @@ const initialState = {
             id: 1,
             amount: 500,
             origin: 1,
-            type: "deposit"
+            type: "deposit",
+            date: serializedDate()
         },
         {
             id: 2,
             amount: 10,
             origin: 1,
-            type: "withdraw"
+            type: "withdraw",
+            date: serializedDate()
         },
         {
             id: 3,
             amount: 50,
             origin: 1,
             destination: 2,
-            type: "payment"
+            type: "payment",
+            date: serializedDate()
         },
         {
             id: 4,
             amount: 100,
             origin: 1,
             destination: 2,
-            type: "payment"
+            type: "payment",
+            date: serializedDate()
         },
         {
             id: 5,
             amount: 5000,
             origin: 2,
-            type: "deposit"
+            type: "deposit",
+            date: serializedDate()
         },
         {
             id: 6,
             amount: 100,
             origin: 2,
             destination: 1,
-            type: "payment"
+            type: "payment",
+            date: serializedDate()
         },
     ] as Array<ITransaction>
 }
@@ -59,7 +66,8 @@ export const fiatSlice = createSlice({
                 id: idGenerator(),
                 type: "deposit",
                 amount: payload.amount,
-                origin: payload.origin
+                origin: payload.origin,
+                date: serializedDate()
             }
 
             state.transactions.push(deposit)
@@ -71,7 +79,8 @@ export const fiatSlice = createSlice({
                     id: idGenerator(),
                     type: "withdraw",
                     amount: payload.amount,
-                    origin: payload.origin
+                    origin: payload.origin,
+                    date: serializedDate()
                 }
 
                 state.transactions.push(withdraw)
@@ -87,7 +96,8 @@ export const fiatSlice = createSlice({
                     type: "payment",
                     amount: payload.amount,
                     origin: payload.origin,
-                    destination: payload.destination
+                    destination: payload.destination,
+                    date: serializedDate()
                 }
 
                 state.transactions.push(payment)

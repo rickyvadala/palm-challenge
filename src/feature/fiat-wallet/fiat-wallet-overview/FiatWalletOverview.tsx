@@ -10,8 +10,6 @@ import "./FIatWalletOverview.scss"
 import {FiatWalletTransaction} from "../fiat-wallet-transaction/FiatWalletTransaction";
 import {PlusCircleOutlined} from '@ant-design/icons';
 
-
-
 export const FiatWalletOverview: React.FC = () => {
     const user = useSelector(currentUserSelector)
     const balance = useGetBalance()
@@ -54,6 +52,11 @@ export const FiatWalletOverview: React.FC = () => {
             title: 'Destination',
             dataIndex: 'destination',
             key: 'destination'
+        },
+        {
+            title: 'Date',
+            dataIndex: 'date',
+            key: 'date'
         },
     ];
 

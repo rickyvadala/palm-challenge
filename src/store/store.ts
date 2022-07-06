@@ -6,7 +6,8 @@ export const store: any = configureStore({
     reducer: {
         [usersSlice.name]: usersSlice.reducer,
         [fiatSlice.name]: fiatSlice.reducer
-    }
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 })
 
 export type AppDispatch = typeof store.dispatch

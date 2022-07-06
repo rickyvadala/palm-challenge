@@ -5,5 +5,6 @@ export interface ITransaction {
     amount: number,
     type: TransactionType,
     origin?: number,
-    destination?: number | undefined
+    destination?: number | undefined,
+    date: string
 }

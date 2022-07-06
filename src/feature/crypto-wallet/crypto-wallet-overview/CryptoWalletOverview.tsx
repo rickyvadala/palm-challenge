@@ -9,6 +9,7 @@ import "./CryptoWalletOverview.scss"
 import {CryptoWalletTransaction} from "../crypto-wallet-transaction/CryptoWalletTransaction";
 import {openNotification} from "../../../components/atom/Notification";
 import {ReloadOutlined, PlusCircleOutlined} from '@ant-design/icons';
+import {timestampToDate} from "../../../utils/dateUtils";
 
 export const CryptoWalletOverview: React.FC = () => {
     const {accountBalance, connectedAccount, getTransactions} = useMetaMaskAccount()
@@ -25,7 +26,10 @@ export const CryptoWalletOverview: React.FC = () => {
     }
 
     const getAllTransactions = () => {
-        getTransactions(connectedAccount).then((trx: []) => setTransactions(trx.reverse()))
+        getTransactions(connectedAccount).then((trx: []) => {
+            console.log(trx)
+            setTransactions(trx.reverse())
+        })
     }
 
     useEffect(() => {
@@ -67,6 +71,12 @@ export const CryptoWalletOverview: React.FC = () => {
             dataIndex: 'to',
             key: 'to',
             render: (hash) => <Tooltip title={hash}>{hash.slice(0, 10)}...</Tooltip>
+        },
+        {
+            title: 'Date',
+            dataIndex: 'timestamp',
+            key: 'timestamp',
+            render: (timestamp) => timestampToDate(timestamp)
         },
     ];
 
