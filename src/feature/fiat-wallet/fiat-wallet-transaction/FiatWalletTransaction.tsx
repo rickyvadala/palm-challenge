@@ -40,7 +40,7 @@ export const FiatWalletTransaction: React.FC<FiatWalletTransaction> = ({isModalV
             else dispatch(pay(parsedTransaction))
             handleOk()
         } catch (e: any) {
-            openNotification({message: 'Error', description: e.description})
+            openNotification({description: e.message})
         }
     }
 

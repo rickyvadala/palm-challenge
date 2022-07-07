@@ -7,7 +7,7 @@ import Button from "../../components/atom/Button";
 import './RegisterForm.scss'
 import {IUser} from "../../model";
 import {KeyOutlined, UserOutlined} from '@ant-design/icons';
-import {NotificationType, openNotification} from "../../components/atom/Notification";
+import {openNotification} from "../../components/atom/Notification";
 
 export const RegisterForm: React.FC = () => {
     const dispatch = useAppDispatch()
@@ -24,11 +24,7 @@ export const RegisterForm: React.FC = () => {
             dispatch(login(user))
             navigate('/home')
         } catch (e: any) {
-            const notification: NotificationType = {
-                message: 'Error',
-                description: e.message
-            }
-            openNotification(notification)
+            openNotification({description: e.message})
         }
     };
 

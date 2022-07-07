@@ -4,7 +4,7 @@ import Button from "../../../components/atom/Button";
 import "./CryptoWalletTransaction.scss"
 import {UserOutlined} from "@ant-design/icons";
 import {useMetaMaskAccount} from "../../../providers/MetaMaskProvider";
-import {ICryptoTransaction} from "../../../model/ICryptoTransaction";
+import {ICryptoTransaction} from "../../../model";
 import {openNotification} from "../../../components/atom/Notification";
 
 type CryptoWalletTransactionType = {
@@ -26,7 +26,7 @@ export const CryptoWalletTransaction: React.FC<CryptoWalletTransactionType> =
                 console.log(res)
                 handleOk()
             }).catch(() => {
-                openNotification({message: 'Error', description: 'Transaction canceled by user'})
+                openNotification({description: 'Transaction canceledin MetaMask'})
             })
         }
 

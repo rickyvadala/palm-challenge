@@ -3,7 +3,7 @@ import {useMetaMaskAccount} from "../../../providers/MetaMaskProvider";
 import {Space, Table, Tag, Tooltip} from "antd";
 import {ColumnsType} from "antd/lib/table";
 import {ethers} from "ethers";
-import {ICryptoTransaction} from "../../../model/ICryptoTransaction";
+import {ICryptoTransaction} from "../../../model";
 import Button from "../../../components/atom/Button";
 import "./CryptoWalletOverview.scss"
 import {CryptoWalletTransaction} from "../crypto-wallet-transaction/CryptoWalletTransaction";
@@ -20,7 +20,8 @@ export const CryptoWalletOverview: React.FC = () => {
     const handleOk = () => {
         setIsModalVisible(false)
         openNotification({
-            message: 'Attention',
+            type: "success",
+            message: 'Success',
             description: 'The transaction is being processed, wait a couple of seconds and reload'
         })
     }

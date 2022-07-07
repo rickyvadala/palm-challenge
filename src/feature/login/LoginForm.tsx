@@ -6,7 +6,7 @@ import {login} from "../../store/slices/users";
 import {useNavigate} from "react-router-dom";
 import Button from "../../components/atom/Button";
 import {KeyOutlined, UserOutlined} from '@ant-design/icons';
-import {NotificationType, openNotification} from "../../components/atom/Notification";
+import {openNotification} from "../../components/atom/Notification";
 
 
 export const LoginForm: React.FC = () => {
@@ -21,11 +21,7 @@ export const LoginForm: React.FC = () => {
             }))
             navigate('/home')
         } catch (e: any) {
-            const notification: NotificationType = {
-                message: 'Error',
-                description: e.message
-            }
-            openNotification(notification)
+            openNotification({description: e.message})
         }
     };
 

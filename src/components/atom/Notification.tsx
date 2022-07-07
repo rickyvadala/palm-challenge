@@ -1,19 +1,21 @@
 import {notification} from 'antd';
+import {IconType} from "antd/lib/notification";
 
 export type NotificationType = {
-    message: string,
-    description: string,
-    type?: string
+    message?: string,
+    description?: string,
+    type?: IconType | undefined
 }
 export const openNotification = ({
-                                     type = "Error",
-                                     message = 'Notification Title',
-                                     description = 'This is the content of the notification.',
+                                     type = "error",
+                                     message = 'Error',
+                                     description = 'Something happened :(',
                                      ...props
                                  }: NotificationType) => {
     notification.open({
         message: message,
         description: description,
+        type: type,
         ...props
     });
 };

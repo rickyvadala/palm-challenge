@@ -12,9 +12,7 @@ export const CryptoWalletConnection = () => {
             connectAccount()
         } else {
             openNotification({
-                message: "Error",
                 description: "Please install MetaMask to access your Crypto Wallet",
-                type: "error"
             })
         }
     }

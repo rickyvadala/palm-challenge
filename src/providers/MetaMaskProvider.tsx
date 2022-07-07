@@ -41,6 +41,11 @@ const MetaMaskAccountProvider = ({children}: ProviderProps) => {
             // Reload if chain changes
             window.ethereum.on('chainChanged', () => window.location.reload());
 
+            window.ethereum.on('message', (message: any) => {
+                console.log("message listener: ", message)
+                message.wait((res: any)=> console.log('res: ', res), 1000)
+            });
+
             // Reload if account changes
             window.ethereum.on('accountsChanged', (accounts: Array<string>) => {
                 window.location.reload()
@@ -51,8 +56,7 @@ const MetaMaskAccountProvider = ({children}: ProviderProps) => {
             if (chainId === kovanId) {
                 setEthereum(window.ethereum);
             } else {
-                // @todo add error handling
-                openNotification({message: "Error", description: "Please use Kovan network"});
+                openNotification({description: "Please use Kovan testnet"});
             }
         }
     }

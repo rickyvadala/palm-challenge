@@ -89,6 +89,9 @@ export const fiatSlice = createSlice({
             }
         },
         pay: (state, {payload}) => {
+            if (payload.destination === payload.origin) {
+                throw Error(`You can't do a payment to yourself`)
+            }
             const nextAmount = balanceCalculator(state.transactions, payload.origin) - payload.amount
             if (nextAmount >= 0) {
                 const payment: ITransaction = {
