@@ -111,7 +111,9 @@ export const CryptoWalletOverview: React.FC = () => {
             />
             <CryptoWalletTransaction isModalVisible={isModalVisible}
                                      handleOk={handleOk}
-                                     handleCancel={handleCancel}/>
+                                     handleCancel={handleCancel}
+                                     handleReload={getAllTransactions}
+            />
         </div>
     )
 }

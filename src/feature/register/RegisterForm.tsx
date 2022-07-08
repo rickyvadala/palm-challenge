@@ -28,10 +28,6 @@ export const RegisterForm: React.FC = () => {
         }
     };
 
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
-
     return (
         <Form className="register-form"
               name="basic"
@@ -39,7 +35,6 @@ export const RegisterForm: React.FC = () => {
               wrapperCol={{span: 24}}
               initialValues={{remember: true}}
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
               autoComplete="off"
         >
             <Form.Item

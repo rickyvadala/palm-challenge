@@ -41,11 +41,6 @@ const MetaMaskAccountProvider = ({children}: ProviderProps) => {
             // Reload if chain changes
             window.ethereum.on('chainChanged', () => window.location.reload());
 
-            window.ethereum.on('message', (message: any) => {
-                console.log("message listener: ", message)
-                message.wait((res: any)=> console.log('res: ', res), 1000)
-            });
-
             // Reload if account changes
             window.ethereum.on('accountsChanged', (accounts: Array<string>) => {
                 window.location.reload()

@@ -10,20 +10,24 @@ import {openNotification} from "../../../components/atom/Notification";
 type CryptoWalletTransactionType = {
     isModalVisible: boolean | undefined,
     handleOk: () => void,
-    handleCancel: () => void
+    handleCancel: () => void,
+    handleReload: () => void
 }
 
 export const CryptoWalletTransaction: React.FC<CryptoWalletTransactionType> =
     ({
          isModalVisible,
          handleOk,
-         handleCancel
+         handleCancel,
+         handleReload
      }) => {
         const {transfer} = useMetaMaskAccount()
 
         const onFinish = (t: ICryptoTransaction) => {
-            transfer(t.value, t.to).then((res: any) => {
-                console.log(res)
+            transfer(t.value, t.to).then((transfer: any) => {
+
+                transfer.wait((res: any) => handleReload)
+
                 handleOk()
             }).catch(() => {
                 openNotification({description: 'Transaction canceledin MetaMask'})
